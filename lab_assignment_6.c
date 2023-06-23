@@ -2,7 +2,31 @@
 
 int search(int numbers[], int low, int high, int value) 
 {
-	return -1;
+	// Value is not in array or inbetween low and high
+	if ((low + 1 == high) || (low == high))
+	{
+		return -1;
+	}
+
+	// Catch if high equals value to cut down time
+	if (numbers[high] == value)
+	{
+		low = high;
+	}
+
+	// Meat of operation
+	if (numbers[low] == value)
+	{
+		return low;
+	} else if (numbers[(low + high) / 2] > value)
+	{
+		high = (low + high) / 2;
+		search(numbers, low, high, value);
+	} else if (numbers[(low + high) / 2] <= value)
+	{
+		low = (low + high) / 2; 
+		search(numbers, low, high, value);
+	} 
 }
 
 void printArray(int numbers[], int sz)
